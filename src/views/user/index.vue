@@ -206,15 +206,15 @@ export default {
       rules: {
         adminName: [
           { required: true, message: '请输入姓名', trigger: 'blur' },
-          { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
+          { min: 2, max: 5, message: '长度在 2 到 5 之间', trigger: 'blur' }
         ],
         loginName: [
           { required: true, message: '请输入登陆名', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 7 个字符', trigger: 'blur' }
+          { min: 3, max: 5, message: '长度在 3 到 7 之间', trigger: 'blur' }
         ],
         adminPwd: [
           { required: true, message: '请输入登陆密码', trigger: 'blur' },
-          { min: 6, max: 16, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { min: 6, max: 16, message: '长度在 3 到 5 之间', trigger: 'blur' }
         ],
         adminMobile: [
           { required: true, message: '请输入手机号', trigger: 'blur' }
@@ -240,7 +240,6 @@ export default {
   methods: {
     // 添加管理员信息
     handleConfirmDialog() {
-      console.log(this.form)
       addUser(this.form).then((res) => {
         this.$message.success('添加用户成功！')
         this.$refs.ruleForm.resetFields()
@@ -307,6 +306,8 @@ export default {
       this.fetchData()
     },
     handleEdit(index, item) {
+      this.form = Object.assign({}, this.form, item)
+      this.dialogUserVisible = true
     },
     handleDelete(index, item) {
       this.$confirm(`将要删除用户${item.adminName}, 是否继续?`, '提示', {

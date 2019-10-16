@@ -5,7 +5,7 @@
         <el-input v-model="condition" placeholder="角色名称"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="danger" @click="handleAddRole">添加</el-button>
+        <el-button type="danger" @click="dialogRoleVisible = true">添加</el-button>
         <el-button type="primary" @click="fetchData">查询</el-button>
       </el-form-item>
     </el-form>
@@ -39,17 +39,17 @@
           {{ scope.row.roleSort }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="状态" width="180" align="center">
-        <template slot-scope="scope">
-          <el-switch
-            v-model="!scope.row.status"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-            active-text="启用"
-            inactive-text="禁用">
-          </el-switch>
-        </template>
-      </el-table-column>
+<!--      <el-table-column class-name="status-col" label="状态" width="180" align="center">-->
+<!--        <template slot-scope="scope">-->
+<!--          <el-switch-->
+<!--            v-model="!scope.row.status"-->
+<!--            active-color="#13ce66"-->
+<!--            inactive-color="#ff4949"-->
+<!--            active-text="启用"-->
+<!--            inactive-text="禁用">-->
+<!--          </el-switch>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
       <el-table-column align="center" label="操作" width="160">
         <template slot-scope="scope">
           <el-button size="mini" type="primary" icon="el-icon-edit" circle @click="handleEdit(scope.$index, scope.row)"></el-button>
@@ -157,9 +157,6 @@ export default {
         }
       })
     },
-    handleAddRole() {
-      this.dialogRoleVisible = true
-    },
     fetchMenu() {
       getMenuList().then((res) => {
         if (res.head.ret === 0) {
@@ -185,6 +182,8 @@ export default {
       })
     },
     handleEdit(index, item) {
+      this.form = Object.assign({}, this.form, item)
+      this.dialogRoleVisible = true
     },
     handleDelete(index, item) {
       this.$confirm(`将要角色菜单${item.roleName}, 是否继续?`, '提示', {

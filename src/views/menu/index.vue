@@ -51,17 +51,17 @@
         align="center"
         width="120">
       </el-table-column>
-      <el-table-column class-name="status-col" label="状态" width="180" align="center">
-        <template slot-scope="scope">
-          <el-switch
-            v-model="!scope.row.status"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-            active-text="启用"
-            inactive-text="禁用">
-          </el-switch>
-        </template>
-      </el-table-column>
+<!--      <el-table-column class-name="status-col" label="状态" width="180" align="center">-->
+<!--        <template slot-scope="scope">-->
+<!--          <el-switch-->
+<!--            v-model="!scope.row.status"-->
+<!--            active-color="#13ce66"-->
+<!--            inactive-color="#ff4949"-->
+<!--            active-text="启用"-->
+<!--            inactive-text="禁用">-->
+<!--          </el-switch>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
       <el-table-column align="center" label="操作" width="160">
         <template slot-scope="scope">
           <el-button
@@ -199,15 +199,15 @@ export default {
       rules: {
         sourceName: [
           { required: true, message: '请输入菜单名称', trigger: 'blur' },
-          { min: 1, max: 5, message: '长度在 1 到 5 个字符', trigger: 'blur' }
+          { min: 1, max: 5, message: '长度在 1 到 5 之间', trigger: 'blur' }
         ],
         sourceMark: [
           { required: true, message: '请输入菜单标记', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { min: 1, max: 50, message: '长度在 1 到 50 之间', trigger: 'blur' }
         ],
         sourceLink: [
           { required: true, message: '请输入菜单链接', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { min: 1, max: 50, message: '长度在 1 到 50 之间', trigger: 'blur' }
         ],
         sourceSort: [
           { required: true, message: '请输入菜单显示排序号', trigger: 'change' }
@@ -253,6 +253,8 @@ export default {
       })
     },
     handleEdit(index, item) {
+      this.form = Object.assign({}, this.form, item)
+      this.dialogMenuVisible = true
     },
     /*
     添加菜单
